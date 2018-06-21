@@ -1,6 +1,6 @@
 import React from 'react'
 // import * as MovieAPI from './MovieAPI'
-import './App.css'
+import './styles/css/App.css';
 
 class App extends React.Component {
   state = {
