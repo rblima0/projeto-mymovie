@@ -18,9 +18,9 @@ export default class Menu extends Component {
                     <img src="img/mymovies-logo.svg" alt="Logo icon" />
                     <span>Menu Principal</span>
                     <ul>
-                        <li><a href="index.html">Lançamentos</a></li>
-                        <li><a href="#">Próximas estreias</a></li>
-                        <li><a href="#">Populares</a></li> 
+                        <li><a href="/">Lançamentos</a></li>
+                        <li><a href="/movie">Próximas estreias</a></li>
+                        <li><a href="/search">Populares</a></li> 
                         <li><a href="#">Bem avaliados</a></li>
                         <li><a href="#">Pessoas</a></li>
                     </ul>
