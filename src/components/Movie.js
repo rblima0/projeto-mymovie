@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class Movie extends Component {
 
@@ -12,7 +12,7 @@ export default class Movie extends Component {
 
                 <div className="movie-principal">
                     <img src="img/1-1.jpg" alt="Movie" />
-                    <a href="#">Assistir trailer</a>
+                    <a href="">Assistir trailer</a>
                 </div>
                 
                 <h2>Jurassic World: O Reino está Ameaçado (2018)</h2>
@@ -34,7 +34,7 @@ export default class Movie extends Component {
                 </div>
                 
             </div>
-        );
+        )
     }
 }
 

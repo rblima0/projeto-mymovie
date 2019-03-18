@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class Search extends Component {
 
@@ -13,7 +13,7 @@ export default class Search extends Component {
                     <input type="text" placeholder="Faça sua pesquisa..." />
                 </form>
             </section>
-        );
+        )
     }
 }
 

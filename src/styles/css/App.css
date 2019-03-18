@@ -111,6 +111,11 @@ nav ul li a:hover {
     color: #fff;
 }
 
+.item a h3 {
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
 .item a:hover {
     color: #f7c70c;
 }
@@ -133,7 +138,8 @@ nav ul li a:hover {
 
 .item p {
     padding: 1em 0;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 /* MEDIA QUERIES */

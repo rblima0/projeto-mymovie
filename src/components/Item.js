@@ -1,27 +1,28 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
+export { MOVIE_URL_IMG } from '../utils/keys'
 
 export default class Item extends Component {
 
-    /* constructor(){
-
-    } */
-
     render() {
+        
+        const { movie } = this.props
+
         return (
             <div className="item">
                 <Link to={`/movie`}>
-                    <img src="img/1.jpg" alt="Movie" />
+                    <img src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
                 </Link>
                 <Link to={`/movie`}>
-                    <h3>Jurassic World</h3>
+                    <h3>{movie.title}</h3>
                 </Link>
                 <span>Ação</span><span>Aventura</span><span>Ficção Científica</span>
                 
-                <p>Quatro anos após o fechamento do Jurassic World, um vulcão prestes a entrar em erupção põe em risco a vida na ilha Nublar. No local não há mais qualquer presença...</p>
+                <p>{movie.overview}</p>
                 <p>Mais informações necessárias</p>
             </div>
-        );
+        )
     }
 }
 
