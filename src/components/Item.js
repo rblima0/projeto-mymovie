@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-export { MOVIE_URL_IMG } from '../utils/keys'
-
 export default class Item extends Component {
 
     render() {
         
         const { movie } = this.props
-
+        
         return (
             <div className="item">
                 <Link to={`/movie`}>

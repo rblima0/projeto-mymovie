@@ -17,10 +17,14 @@ class App extends React.Component {
         super(props)
         this.state = {
             movies: []
-        }
+		}
     }
 
     componentDidMount() {
+		this.fetchMovieList()
+	}
+
+	fetchMovieList = () => {
 		return fetch(MOVIE_URL_LIST)
 			.then(response => response.json())
 			.then(json => json.results)
@@ -33,11 +37,10 @@ class App extends React.Component {
 			})
 	}
 
-	render() {
 
-		if (!this.state.movies) {
-			return <div>Loading...</div>
-		}
+	render() {
+		
+		const { movies } = this.state
 
 		return (
 		<div className="container">
@@ -54,7 +57,7 @@ class App extends React.Component {
 					)} />
 
 					{/* COMPONENTE PRINCIPAL DE LISTA */}
-					{this.state.movies.map(movie => (
+					{movies.map(movie => (
 						<Item key={movie.id} movie={movie} />
 					))}
 
