@@ -1,36 +1,51 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
 //import * as MovieAPI from './utils/MovieAPI'
-import { MOVIE_URL_LIST } from './utils/keys'
+import { MOVIE_URL_LIST, MOVIE_GENRE_LIST } from '../api'
 
-import Menu from './components/Menu'
-import Search from './components/Search'
-import Item from './components/Item'
-import Movie from './components/Movie'
+import Menu from '../components/Menu'
+import Search from '../components/Search'
+import Item from '../components/Item'
+import Movie from '../components/Movie'
 
-import './styles/css/App.css'
+import '../styles/css/App.css'
 
-class App extends React.Component {
+export default class App extends Component {
 
-	constructor(props){
-        super(props)
-        this.state = {
-            movies: []
-		}
-    }
+	constructor(props) {
+		super(props)
+		this.state = { movies: [], genres: [] }
+
+		this.fetchMovieList = this.fetchMovieList.bind(this)
+		this.fetchGenreList = this.fetchGenreList.bind(this)
+	}
 
     componentDidMount() {
 		this.fetchMovieList()
+		this.fetchGenreList()
 	}
 
-	fetchMovieList = () => {
+	fetchMovieList() {
 		return fetch(MOVIE_URL_LIST)
 			.then(response => response.json())
 			.then(json => json.results)
 			.then(data => {
-				console.log(data)
+				//console.log(data)
 				this.setState(() => ({ movies: data }))
+			})
+			.catch(error => {
+				console.error('Server Error', error)
+			})
+	}
+
+	fetchGenreList() {
+		return fetch(MOVIE_GENRE_LIST)
+			.then(response => response.json())
+			.then(json => json.genres)
+			.then(data => {
+				//console.log(data)
+				this.setState(() => ({ genres: data }))
 			})
 			.catch(error => {
 				console.error('Server Error', error)
@@ -40,14 +55,14 @@ class App extends React.Component {
 
 	render() {
 		
-		const { movies } = this.state
+		const { movies, genres } = this.state
 
 		return (
 		<div className="container">
 			<div className="row">
 				
 				{/* COMPONENTE DO MENU LATERAL */}
-				<Menu />
+				<Menu genres={genres} />
 			
 				<section className="col col-content">
 
@@ -73,5 +88,3 @@ class App extends React.Component {
 		)
 	}
 }
-
-export default App
