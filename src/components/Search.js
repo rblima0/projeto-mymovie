@@ -1,10 +1,12 @@
 import React from 'react'
 
 const Search = (props) => {
+    const { handleSubmit, handleChange } = props
+
     return (
         <section className="search">
-            <form action="">
-                <input type="text" placeholder="Faça sua pesquisa..." />
+            <form action="" onSubmit={handleSubmit}>
+                <input type="text" placeholder="Faça sua pesquisa..." onChange={handleChange} />
             </form>
         </section>
     )
