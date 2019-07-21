@@ -12,7 +12,7 @@ const Item = (props) => {
                 </Link>
                 <Link to={`/movie/${movie.id}`}><h3>{movie.title}</h3></Link>
                 {movie.genre_ids.map(item => (
-                    <span key={item}>{genres.find(({ id }) => id === item).name}</span>
+                    <span key={item}>{genres.find(({ id }) => id === item).name || ''}</span>
                 ))}
                 <p>{movie.overview}</p>
             </div>

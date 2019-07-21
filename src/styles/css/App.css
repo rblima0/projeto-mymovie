@@ -144,6 +144,38 @@ nav ul li a:hover {
     line-height: 16px;
 }
 
+.pagination {
+    text-align: center;
+}
+
+li.link {
+    display: inline-block;
+    background-color: #843725;
+    margin: 0.2em 0.5em;
+    width: 30px;
+    text-align: center;
+}
+
+li.link.next,
+li.link.previous {
+    width: 50px;
+}
+
+li.link.active {
+    background-color: #128ca0;
+}
+
+li.link a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+li.link a:hover {
+    color: #1e2634;
+    text-decoration: underline;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 993px) {
     .container {

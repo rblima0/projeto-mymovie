@@ -1,7 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Menu = (props) => {
-
     const { genres } = props
 
     return (
@@ -16,15 +16,17 @@ const Menu = (props) => {
                 <span>Menu Principal</span>
                 <ul>
                     <li><a href="/">Lançamentos</a></li>
-                    <li><a href="/movie">Próximas estreias</a></li>
-                    <li><a href="/search">Populares</a></li> 
-                    <li><a href="">Bem avaliados</a></li>
-                    <li><a href="">Pessoas</a></li>
+                    <li><a href="/">Próximas estreias</a></li>
+                    <li><a href="/">Populares</a></li> 
+                    <li><a href="/">Bem avaliados</a></li>
+                    <li><a href="/">Pessoas</a></li>
                 </ul>
                 <span>Gêneros</span>
                 <ul>
                     {genres.map(genre => (
-                        <li key={genre.id}><a href="">{genre.name}</a></li>
+                        <li key={genre.id}>
+                            <Link to={`/genre/${genre.id}`}>{genre.name}</Link>
+                        </li>
                     ))}
                 </ul> 
             </nav>

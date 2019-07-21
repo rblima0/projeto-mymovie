@@ -6,6 +6,7 @@ import { MOVIE_DISCOVER_LIST, MOVIE_GENRE_LIST } from '../api'
 import Menu from '../components/Menu'
 import Search from '../components/Search'
 import Item from '../components/Item'
+import Pagination from '../components/Pagination'
 import Movie from '../components/Movie'
 
 import '../styles/css/App.css'
@@ -17,15 +18,17 @@ export default class App extends Component {
 		this.state = { 
 			movies: [], 
 			genres: [],
-			movie_search: ''
+			movieSearch: '',
+			results: 0,
+			currentPage: 1
 		}
 
 		this.api_key = process.env.REACT_APP_API_KEY
-
-		this.fetchMovieList = this.fetchMovieList.bind(this)
 		this.fetchGenreList = this.fetchGenreList.bind(this)
+		this.fetchMovieList = this.fetchMovieList.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+		this.shouldPaginate = this.shouldPaginate.bind(this)
 	}
 
     componentDidMount() {
@@ -38,6 +41,7 @@ export default class App extends Component {
 			.then(response => response.json())
 			.then(json => json.genres)
 			.then(data => {
+				//console.log(data)
 				this.setState(() => ({ genres: data }))
 			})
 			.catch(error => {
@@ -46,10 +50,11 @@ export default class App extends Component {
 	}
 
 	fetchMovieList() {
-		return fetch(MOVIE_DISCOVER_LIST)
+		return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${this.api_key}&language=pt-BR&sort_by=popularity.desc`)
 			.then(response => response.json())
 			.then(json => json.results)
 			.then(data => {
+				//console.log(data)
 				this.setState(() => ({ movies: data }))
 			})
 			.catch(error => {
@@ -58,14 +63,14 @@ export default class App extends Component {
 	}
 
 	handleSubmit(e) {
-		const { movie_search } = this.state
+		const { movieSearch } = this.state
 
 		e.preventDefault()
-		return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&language=pt-BR&query=${movie_search}&page=1&include_adult=false`)
-			.then(response => response.json())
-			.then(json => json.results)
+		return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&language=pt-BR&query=${movieSearch}&include_adult=false`)
+			.then(data => data.json())
 			.then(data => {
-				this.setState(() => ({ movies: data }))
+				//console.log(data)
+				this.setState(() => ({ movies: data.results, results: data.total_results }))
 			})
 			.catch(error => {
 				console.error('Server Error', error)
@@ -73,11 +78,30 @@ export default class App extends Component {
 	}
 
 	handleChange(e) {
-		this.setState({ movie_search: e.target.value })
+		if(!e.target.value) {
+			this.fetchMovieList()
+		}
+		this.setState({ movieSearch: e.target.value })
+	}
+
+	shouldPaginate(page) {
+		const { movieSearch } = this.state
+		
+		return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&language=pt-BR&query=${movieSearch}&include_adult=false&page=${page}`)
+			.then(response => response.json())
+			.then(json => json.results)
+			.then(data => {
+				//console.log(data)
+				this.setState(() => ({ movies: data, currentPage: page }))
+			})
+			.catch(error => {
+				console.error('Server Error', error)
+			})
 	}
 
 	render() {
-		const { movies, genres } = this.state
+		const { movies, genres, results, currentPage } = this.state
+		const numberPages = Math.floor(results / 20)
 
 		return (
 		<div className="container">
@@ -87,12 +111,29 @@ export default class App extends Component {
 			
 				<section className="col col-content">
 
-					<Search 
-						handleSubmit={this.handleSubmit}
-						handleChange={this.handleChange} 
-					/>
+					<Route exact path="/" render={(props) => (
+						<Search 
+							handleSubmit={this.handleSubmit}
+							handleChange={this.handleChange} 
+						/>
+					)} />
 
-					<Item movies={movies} genres={genres} />
+					<Route exact path="/" render={(props) => (
+						<Item movies={movies} genres={genres} />
+					)} />
+
+					{ results > 20 && 
+						<Pagination 
+							pages={numberPages} 
+							shouldPaginate={this.shouldPaginate}
+							currentPage={currentPage}
+						/>
+					}
+					
+
+					{/* <Route exact path="/genre/:genre_id" render={(props) => (
+						<Item movies={movies} genres={genres} />
+					)} /> */}
 
 					{/* COMPONENTE DE CARACTERISTICAS DO FILME */}
 					{/* <Route exact path="/movie/:movie_id" render={(props) => (
