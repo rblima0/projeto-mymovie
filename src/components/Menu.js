@@ -12,7 +12,7 @@ const Menu = (props) => {
                 <div></div>
             </div>
             <nav className="menu-hidde" id="menu-hidde">
-                <img src="img/mymovies-logo.svg" alt="Logo icon" />
+                <img src="img/mymovies-logo.svg" alt="Logo MyMovies" />
                 <span>Menu Principal</span>
                 <ul>
                     <li><a href="/">Lançamentos</a></li>

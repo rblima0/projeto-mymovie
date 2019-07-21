@@ -8,6 +8,7 @@ import Search from '../components/Search'
 import Item from '../components/Item'
 import Pagination from '../components/Pagination'
 import Movie from '../components/Movie'
+import ErrorPage from '../components/ErrorPage'
 
 import '../styles/css/App.css'
 
@@ -159,15 +160,17 @@ export default class App extends Component {
 					)} />
 
 					<Route exact path="/movie/:movie_id" render={(props) => (
+						currentMovie ?
 						<Movie 
 							closeMovieInfo={this.closeMovieInfo}
 							currentMovie={currentMovie}
 							genres={genres}
-						/>
+						/> :
+						<ErrorPage/>
 					)} />	
 
 					<Route exact path="/" render={(props) => (
-					results > 20 && 
+						results > 20 && 
 						<Pagination 
 							fetchPaginateList={this.fetchPaginateList}
 							currentPage={currentPage}

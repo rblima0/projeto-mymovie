@@ -1,10 +1,7 @@
 import React from 'react'
 
 const Movie = (props) => {
-
     const { genres, currentMovie, closeMovieInfo } = props
-    
-    console.log(currentMovie)
 
     return (
         <div className="movie">

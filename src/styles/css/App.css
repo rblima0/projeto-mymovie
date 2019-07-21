@@ -376,3 +376,27 @@ hr {
     padding: 0;
     color: #bbc4de;
 }
+
+.error {
+    text-align: center;
+    color: #fff;
+    padding: 2em 0;
+}
+
+.error h2 {
+    text-transform: uppercase;
+}
+
+.error a {
+    display: inline-block;
+    text-transform: uppercase;
+    background-color: #843725;
+    padding: 0.5em 0.8em;
+    margin-top: 2em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.error a:hover {
+    color: #151c25;
+}

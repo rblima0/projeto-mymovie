@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 const Item = (props) => {
     const { movies = [], genres, fetchMovieInfo } = props
-
-    console.log(props)
     
     return (
         movies.map((movie) => (
