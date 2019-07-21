@@ -1,6 +1,5 @@
 /* CHAVE DE AUTENTICAÇÃO */
 export const API_KEY_V1 = '?api_key=5980ad63733ab4725206e0880f35cdf4'
-const API_KEY_V2 = "&api_key=5980ad63733ab4725206e0880f35cdf4"
 const LANGUAGE = '&language=pt-BR'
 const SORT = '&sort_by=popularity.desc'
 const MOVIE_IMG_HOME = `w185/`

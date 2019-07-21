@@ -159,20 +159,23 @@ li.link {
 li.link.next,
 li.link.previous {
     width: 50px;
+    margin: 2em 0.4em;
 }
 
 li.link.active {
     background-color: #128ca0;
 }
 
-li.link a {
+li.link button {
     color: #fff;
     font-weight: bold;
     text-decoration: none;
+    background-color: #843725;
+    cursor: pointer;
 }
 
-li.link a:hover {
-    color: #1e2634;
+li.link button:hover {
+    color: #e3c0ab;
     text-decoration: underline;
 }
 
