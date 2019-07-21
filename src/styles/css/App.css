@@ -323,7 +323,8 @@ li.link button:hover {
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 20px;
-    padding: 0.1em 0.5em;
+    padding: 0.4em 0.5em 0.2em 0.4em;
+    margin-bottom: 0.2em;
     margin-right: 0.2em;
     display: inline-block;
 }

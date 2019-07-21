@@ -7,7 +7,7 @@ import Menu from '../components/Menu'
 import Search from '../components/Search'
 import Item from '../components/Item'
 import Pagination from '../components/Pagination'
-//import Movie from '../components/Movie'
+import Movie from '../components/Movie'
 
 import '../styles/css/App.css'
 
@@ -21,13 +21,15 @@ export default class App extends Component {
 			movieSearch: '',
 			results: 0,
 			currentPage: 1,
-			movie: null
+			currentMovie: null
 		}
 
 		this.api_key = process.env.REACT_APP_API_KEY
 		this.fetchGenreList = this.fetchGenreList.bind(this)
 		this.fetchMovieList = this.fetchMovieList.bind(this)
 		this.fetchPaginateList = this.fetchPaginateList.bind(this)
+		this.fetchMovieInfo = this.fetchMovieInfo.bind(this)
+		this.closeMovieInfo = this.closeMovieInfo.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
@@ -111,8 +113,25 @@ export default class App extends Component {
 		this.setState({ movieSearch: e.target.value })
 	}
 
+	fetchMovieInfo(id) {
+		const { movies } = this.state
+
+		let filterMovie;
+		movies.forEach((movie, i) => {
+			if(movie.id === id) {
+				filterMovie = movie
+			}
+		}) 
+
+		this.setState({ currentMovie: filterMovie })  
+	}
+
+	closeMovieInfo() {
+		this.setState({ currentMovie: null })
+	}
+
 	render() {
-		const { movies, genres, results, currentPage } = this.state
+		const { movies, genres, results, currentPage, currentMovie } = this.state
 		const numberPages = Math.floor(results / 20)
 
 		return (
@@ -131,26 +150,34 @@ export default class App extends Component {
 					)} />
 
 					<Route exact path="/" render={(props) => (
-						<Item movies={movies} genres={genres} />
+						<Item 
+							genres={genres} 
+							movies={movies} 
+							fetchMovieInfo={this.fetchMovieInfo}
+							currentMovie={currentMovie}
+						/>
 					)} />
 
-					{ results > 20 && 
+					<Route exact path="/movie/:movie_id" render={(props) => (
+						<Movie 
+							closeMovieInfo={this.closeMovieInfo}
+							currentMovie={currentMovie}
+							genres={genres}
+						/>
+					)} />	
+
+					<Route exact path="/" render={(props) => (
+					results > 20 && 
 						<Pagination 
 							fetchPaginateList={this.fetchPaginateList}
 							currentPage={currentPage}
 							pages={numberPages} 
 						/>
-					}
+					)} />
 					
 					{/* <Route exact path="/genre/:genre_id" render={(props) => (
 						<Item movies={movies} genres={genres} />
 					)} /> */}
-
-					{/* COMPONENTE DE CARACTERISTICAS DO FILME */}
-					{/* <Route exact path="/movie/:movie_id" render={(props) => (
-						<Movie />
-					)} /> */}
-		
 				</section>
 
 			</div>
