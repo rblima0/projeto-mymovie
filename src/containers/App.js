@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import { MOVIE_GENRE_LIST } from '../api'
+import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from '../api'
 
 import Menu from '../components/Menu'
 import Search from '../components/Search'
@@ -27,7 +27,7 @@ export default class App extends Component {
 
 		this.api_key = process.env.REACT_APP_API_KEY
 		this.fetchGenreList = this.fetchGenreList.bind(this)
-		this.fetchMovieList = this.fetchMovieList.bind(this)
+		this.fetchDiscoverList = this.fetchDiscoverList.bind(this)
 		this.fetchPaginateList = this.fetchPaginateList.bind(this)
 		this.fetchMovieInfo = this.fetchMovieInfo.bind(this)
 		this.limitMovieOverview = this.limitMovieOverview.bind(this)
@@ -38,7 +38,7 @@ export default class App extends Component {
 
     componentDidMount() {
 		this.fetchGenreList()
-		this.fetchMovieList()
+		this.fetchDiscoverList()
 	}
 
 	fetchGenreList() {
@@ -46,7 +46,6 @@ export default class App extends Component {
 			.then(response => response.json())
 			.then(json => json.genres)
 			.then(data => {
-				//console.log(data)
 				this.setState(() => ({ genres: data }))
 			})
 			.catch(error => {
@@ -54,11 +53,10 @@ export default class App extends Component {
 			})
 	}
 
-	fetchMovieList() {
-		return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${this.api_key}&language=pt-BR&sort_by=popularity.desc`)
+	fetchDiscoverList() {
+		return fetch(MOVIE_DISCOVER_LIST)
 			.then(data => data.json())
 			.then(data => {
-				//console.log(data)
 				this.setState(() => ({ movies: data.results, results: data.total_results }))
 			})
 			.catch(error => {
@@ -70,21 +68,19 @@ export default class App extends Component {
 		const { movieSearch } = this.state
 
 		if(movieSearch) {
-			return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&language=pt-BR&query=${movieSearch}&include_adult=false&page=${page}`)
+			return fetch(`${MOVIE_SEARCH}&query=${movieSearch}&page=${page}`)
 				.then(response => response.json())
 				.then(json => json.results)
 				.then(data => {
-					//console.log(data)
 					this.setState(() => ({ movies: data, currentPage: page }))
 				})
 				.catch(error => {
 					console.error('Server Error', error)
 				})
 		} else {
-			return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${this.api_key}&language=pt-BR&sort_by=popularity.desc&page=${page}`)
+			return fetch(`${MOVIE_DISCOVER_LIST}&page=${page}`)
 				.then(data => data.json())
 				.then(data => {
-					//console.log(data)
 					this.setState(() => ({ movies: data.results, results: data.total_results, currentPage: page }))
 				})
 				.catch(error => {
@@ -97,10 +93,9 @@ export default class App extends Component {
 		const { movieSearch } = this.state
 
 		e.preventDefault()
-		return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&language=pt-BR&query=${movieSearch}&include_adult=false`)
+		return fetch(`${MOVIE_SEARCH}&query=${movieSearch}`)
 			.then(data => data.json())
 			.then(data => {
-				//console.log(data)
 				this.setState(() => ({ movies: data.results, results: data.total_results }))
 			})
 			.catch(error => {
@@ -110,7 +105,7 @@ export default class App extends Component {
 
 	handleChange(e) {
 		if(!e.target.value) {
-			this.fetchMovieList()
+			this.fetchDiscoverList()
 		}
 		this.setState({ movieSearch: e.target.value })
 	}
@@ -188,10 +183,6 @@ export default class App extends Component {
 							pages={numberPages} 
 						/>
 					)} />
-					
-					{/* <Route exact path="/genre/:genre_id" render={(props) => (
-						<Item movies={movies} genres={genres} />
-					)} /> */}
 				</section>
 
 			</div>
