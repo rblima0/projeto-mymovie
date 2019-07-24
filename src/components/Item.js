@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Item = (props) => {
-    const { movies = [], genres, fetchMovieInfo } = props
+    const { movies = [], genres, fetchMovieInfo, limitMovieOverview } = props
     
     return (
         movies.map((movie) => (
@@ -14,7 +14,7 @@ const Item = (props) => {
                 {movie.genre_ids.map(item => (
                     <span key={item}>{genres.find(({ id }) => id === item).name || ''}</span>
                 ))}
-                <p>{movie.overview}</p>
+                <p>{limitMovieOverview(movie.overview)}</p>
             </div>
         ))
     )

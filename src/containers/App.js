@@ -30,6 +30,7 @@ export default class App extends Component {
 		this.fetchMovieList = this.fetchMovieList.bind(this)
 		this.fetchPaginateList = this.fetchPaginateList.bind(this)
 		this.fetchMovieInfo = this.fetchMovieInfo.bind(this)
+		this.limitMovieOverview = this.limitMovieOverview.bind(this)
 		this.closeMovieInfo = this.closeMovieInfo.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -117,12 +118,14 @@ export default class App extends Component {
 	fetchMovieInfo(id) {
 		const { movies } = this.state
 
-		let filterMovie;
+		let filterMovie
 		movies.forEach((movie, i) => {
 			if(movie.id === id) {
 				filterMovie = movie
 			}
-		}) 
+		})
+
+		window.scrollTo(0, 0)
 
 		this.setState({ currentMovie: filterMovie })  
 	}
@@ -131,6 +134,13 @@ export default class App extends Component {
 		this.setState({ currentMovie: null })
 	}
 
+	limitMovieOverview(overview, len = 280, end = '...') {
+		if (overview.length > len) {
+			return overview.substring(0, len - end.length) + end
+		} 
+		return overview
+	}
+	
 	render() {
 		const { movies, genres, results, currentPage, currentMovie } = this.state
 		const numberPages = Math.floor(results / 20)
@@ -156,6 +166,7 @@ export default class App extends Component {
 							movies={movies} 
 							fetchMovieInfo={this.fetchMovieInfo}
 							currentMovie={currentMovie}
+							limitMovieOverview={this.limitMovieOverview}
 						/>
 					)} />
 
