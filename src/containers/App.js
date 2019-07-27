@@ -25,7 +25,6 @@ export default class App extends Component {
 			currentMovie: null
 		}
 
-		this.api_key = process.env.REACT_APP_API_KEY
 		this.fetchGenreList = this.fetchGenreList.bind(this)
 		this.fetchDiscoverList = this.fetchDiscoverList.bind(this)
 		this.fetchPaginateList = this.fetchPaginateList.bind(this)
@@ -113,16 +112,20 @@ export default class App extends Component {
 	fetchMovieInfo(id) {
 		const { movies } = this.state
 
-		let filterMovie
-		movies.forEach((movie, i) => {
+		movies.forEach(movie => {
 			if(movie.id === id) {
-				filterMovie = movie
+				fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=5980ad63733ab4725206e0880f35cdf4&language=pt-BR`)
+					.then(data => data.json())
+					.then(data => {
+						this.setState(() => ({ currentMovie: data }))
+					})
+					.catch(error => {
+						console.error('Server Error', error)
+					})
 			}
 		})
 
 		window.scrollTo(0, 0)
-
-		this.setState({ currentMovie: filterMovie })  
 	}
 
 	closeMovieInfo() {
