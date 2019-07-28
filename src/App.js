@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 
-import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from '../api'
+import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from './config/constants'
 
-import Menu from '../components/Menu'
-import Search from '../components/Search'
-import Item from '../components/Item'
-import Pagination from '../components/Pagination'
-import Movie from '../components/Movie'
-import ErrorPage from '../components/ErrorPage'
+import Menu from './components/Menu'
+import Search from './components/Search'
+import Item from './components/Item'
+import Pagination from './components/Pagination'
+import Movie from './components/Movie'
+import ErrorPage from './components/ErrorPage'
 
-import '../styles/css/App.css'
+import './assets/css/App.css'
 
-export default class App extends Component {
+class App extends Component {
 	constructor(props) {
 		super(props)
 
@@ -38,6 +39,7 @@ export default class App extends Component {
     componentDidMount() {
 		this.fetchGenreList()
 		this.fetchDiscoverList()
+		console.log(this.props.value)
 	}
 
 	fetchGenreList() {
@@ -193,3 +195,11 @@ export default class App extends Component {
 		)
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		value: state.field.value
+	}
+}
+
+export default connect(mapStateToProps)(App)
