@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 
+import { bindActionCreators } from 'redux'
+import { changeValue } from './modules/actions/index'
+
 import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from './config/constants'
 
 import Menu from './components/Menu'
@@ -153,14 +156,14 @@ class App extends Component {
 			
 				<section className="col col-content">
 
-					<Route exact path="/" render={(props) => (
+					<Route exact path="/" render={() => (
 						<Search 
 							handleSubmit={this.handleSubmit}
 							handleChange={this.handleChange} 
 						/>
 					)} />
 
-					<Route exact path="/" render={(props) => (
+					<Route exact path="/" render={() => (
 						<Item 
 							genres={genres} 
 							movies={movies} 
@@ -170,7 +173,7 @@ class App extends Component {
 						/>
 					)} />
 
-					<Route exact path="/movie/:movie_id" render={(props) => (
+					<Route exact path="/movie/:movie_id" render={() => (
 						currentMovie ?
 						<Movie 
 							closeMovieInfo={this.closeMovieInfo}
@@ -178,9 +181,9 @@ class App extends Component {
 							genres={genres}
 						/> :
 						<ErrorPage/>
-					)} />	
+					)} />
 
-					<Route exact path="/" render={(props) => (
+					<Route exact path="/" render={() => (
 						results > 20 && 
 						<Pagination 
 							fetchPaginateList={this.fetchPaginateList}
@@ -188,6 +191,7 @@ class App extends Component {
 							pages={numberPages} 
 						/>
 					)} />
+
 				</section>
 
 			</div>
@@ -202,4 +206,8 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ changeValue }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
