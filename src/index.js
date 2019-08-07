@@ -1,26 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
-import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import Movie from './components/Movie'
 import App from './App'
+
+import fieldReducer from './modules/reducers/fieldReducer'
 
 import './assets/css/index.css'
 
 const reducers = combineReducers({
-    field: () => ({ value: 'Hello World' })
+    field: fieldReducer
 })
 
 let store = createStore(
-    reducers,
+    reducers, 
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <App />
+            <Switch>
+                <Route path="/" component={App} />
+                <Route exact path="/movie/:movie_id" component={Movie} />
+            </Switch>
         </Router>
     </Provider>,
     document.getElementById('root')

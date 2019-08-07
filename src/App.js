@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { changeValue } from './modules/actions/index'
@@ -156,41 +155,36 @@ class App extends Component {
 			
 				<section className="col col-content">
 
-					<Route exact path="/" render={() => (
-						<Search 
-							handleSubmit={this.handleSubmit}
-							handleChange={this.handleChange} 
-						/>
-					)} />
+					<Search 
+						handleSubmit={this.handleSubmit}
+						handleChange={this.handleChange} 
+					/>
 
-					<Route exact path="/" render={() => (
-						<Item 
-							genres={genres} 
-							movies={movies} 
-							fetchMovieInfo={this.fetchMovieInfo}
-							currentMovie={currentMovie}
-							limitMovieOverview={this.limitMovieOverview}
-						/>
-					)} />
+					<Item 
+						genres={genres} 
+						movies={movies} 
+						fetchMovieInfo={this.fetchMovieInfo}
+						currentMovie={currentMovie}
+						limitMovieOverview={this.limitMovieOverview}
+					/>
 
-					<Route exact path="/movie/:movie_id" render={() => (
-						currentMovie ?
-						<Movie 
-							closeMovieInfo={this.closeMovieInfo}
-							currentMovie={currentMovie}
-							genres={genres}
-						/> :
-						<ErrorPage/>
-					)} />
-
-					<Route exact path="/" render={() => (
+					{
 						results > 20 && 
 						<Pagination 
 							fetchPaginateList={this.fetchPaginateList}
 							currentPage={currentPage}
 							pages={numberPages} 
 						/>
-					)} />
+					}
+
+					{
+						currentMovie ?
+						<Movie 
+							closeMovieInfo={this.closeMovieInfo}
+							currentMovie={currentMovie}
+							genres={genres}
+						/> : <ErrorPage />
+					}
 
 				</section>
 
