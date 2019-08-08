@@ -1,6 +1,6 @@
-const INITIAL_STATE = { value: 'Hello' }
+import { fieldReducers } from '../actions/index'
 
-export default function fieldReducer(state = INITIAL_STATE, action) {
+const fieldReducer = (state = fieldReducers, action) => {
     switch(action.type) {
         case 'VALUE_CHANGED':
             return { value: action.payload }
@@ -8,3 +8,5 @@ export default function fieldReducer(state = INITIAL_STATE, action) {
             return state
     }
 }
+
+export default fieldReducer

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { bindActionCreators } from 'redux'
-import { changeValue } from './modules/actions/index'
+import { changeValue } from './modules/reducers/index'
 
 import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from './config/constants'
 
@@ -196,7 +196,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
 	return {
-		value: state.field.value
+		value: state.field
 	}
 }
 
