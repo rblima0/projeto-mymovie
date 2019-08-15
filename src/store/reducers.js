@@ -1,9 +1,9 @@
 // CombineReducers
 import { combineReducers } from 'redux'
-import fieldReducer from '../modules/reducers/fieldReducer'
+import genreListReducer from '../modules/reducers/genreListReducer'
 
 const rootReducer = combineReducers({
-    fieldReducer
+    genreListReducer
 })
 
 export default rootReducer

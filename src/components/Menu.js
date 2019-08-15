@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 const Menu = (props) => {
     const { genres } = props
 
+    //console.log(props)
+
     return (
         <section className="col col-sidebar">
             <div className="menu-trigger" id="menu-trigger">
