@@ -1,26 +1,22 @@
 // Action Creators
 import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from '../../config/constants'
 
-export const FETCH_GENRE_LIST = 'FETCH_GENRE_LIST'
-export const FETCH_GENRE_LIST_SUCCESS = 'FETCH_GENRE_LIST_SUCCESS'
-export const FETCH_GENRE_LIST_FAILURE = 'FETCH_GENRE_LIST_FAILURE'
-
-function setFetchGenreList() {
+export function setFetchGenreList() {
     return {
-        type: FETCH_GENRE_LIST
+        type: 'FETCH_GENRE_LIST'
     }
 }
 
-function setFetchGenreListSuccess(data) {
+export function setFetchGenreListSuccess(data) {
     return {
-        type: FETCH_GENRE_LIST_SUCCESS,
+        type: 'FETCH_GENRE_LIST_SUCCESS',
         data
     }
 }
 
-function setFetchGenreListFail(error) {
+export function setFetchGenreListFail(error) {
     return {
-        type: FETCH_GENRE_LIST_FAILURE,
+        type: 'FETCH_GENRE_LIST_FAILURE',
         error
     }
 }

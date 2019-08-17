@@ -14,42 +14,17 @@ import Movie from './components/Movie'
 import ErrorPage from './components/ErrorPage'
 
 import './assets/css/App.css'
-import { fetchGenreList } from './modules/actions/index'
 
-class App extends Component {
-	constructor(props) {
-		super(props)
-    }
-
-    componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(fetchGenreList())
-    }
-	
-	render() {
-        const { genres } = this.props
-
-		return (
+const App = () => {
+	return (
 		<div className="container">
 			<div className="row">
 				
-				<Menu genres={genres} />
+				<Menu/>
 
 			</div>
 		</div>
-		)
-	}
+	)
 }
 
-function mapStateToProps(state) {
-    const { genreListReducer } = state
-    const { error, genres, isFetching } = genreListReducer
-
-	return { error, genres, isFetching }
-}
-
-/* function mapDispatchToProps(dispatch) {
-	return fetchGenreList({ changeValue }, dispatch)
-} */
-
-export default connect(mapStateToProps)(App)
+export default App
