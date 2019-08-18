@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchGenreList } from '../modules/actions/index'
-
 import { Link } from 'react-router-dom'
+
+import { fetchGenreList } from '../actions/index'
 
 class Menu extends Component {
     constructor(props) {
@@ -11,8 +11,7 @@ class Menu extends Component {
     }
 
     componentDidMount() {
-        const { fetchGenreList } = this.props
-        fetchGenreList()
+        this.props.fetchGenreList()
     }
 
     render() {

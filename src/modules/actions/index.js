@@ -1,6 +1,8 @@
 // Action Creators
 import { MOVIE_GENRE_LIST, MOVIE_DISCOVER_LIST, MOVIE_SEARCH } from '../../config/constants'
 
+// GENRE LIST
+
 export function setFetchGenreList() {
     return {
         type: 'FETCH_GENRE_LIST'
@@ -29,5 +31,38 @@ export function fetchGenreList() {
             .then(json => json.genres)
             .then(data => dispatch(setFetchGenreListSuccess(data)))
             .catch(error => dispatch(setFetchGenreListFail(error)))
+    }
+}
+
+// MOVIE LIST
+
+export function setFetchDiscoverList() {
+    return {
+        type: 'FETCH_DISCOVER_LIST'
+    }
+}
+  
+export function setFetchDiscoverListSuccess(data) {
+    return {
+        type: 'FETCH_DISCOVER_LIST_SUCCESS',
+        data
+    }
+}
+  
+export function setFetchDiscoverListFail(error) {
+    return {
+        type: 'FETCH_DISCOVER_LIST_FAILURE',
+        error
+    }
+}
+
+export function fetchDiscoverList() {
+    return function(dispatch) {
+        dispatch(setFetchDiscoverList())
+        return fetch(MOVIE_DISCOVER_LIST)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(setFetchDiscoverListSuccess(data)))
+            .catch(error => dispatch(setFetchDiscoverListFail(error)))
     }
 }
