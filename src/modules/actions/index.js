@@ -66,3 +66,38 @@ export function fetchDiscoverList() {
             .catch(error => dispatch(setFetchDiscoverListFail(error)))
     }
 }
+
+// MOVIE SEARCH
+
+export function setFetchSearchMovieList(search) {
+    return {
+        type: 'FETCH_SEARCH_MOVIE_LIST',
+        search
+    }
+}
+
+export function setFetchSearchMovieListSuccess(data, search) {
+    return {
+        type: 'FETCH_SEARCH_MOVIE_LIST_SUCCESS',
+        data,
+        search
+    }
+}
+
+export function setFetchSearchMovieListFail(error) {
+    return {
+        type: 'FETCH_SEARCH_MOVIE_LIST_FAILURE',
+        error
+    }
+}
+
+export function fetchSearchMovieList(search) {
+    return function(dispatch) {
+        dispatch(setFetchSearchMovieList())
+        return fetch(`${MOVIE_SEARCH}&query=${search}`)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(setFetchSearchMovieListSuccess(data)))
+            .catch(error => dispatch(setFetchSearchMovieListFail(error)))
+    }
+}
