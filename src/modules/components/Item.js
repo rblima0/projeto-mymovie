@@ -13,8 +13,10 @@ class Item extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchGenreList()
-        this.props.fetchDiscoverList()
+        const { fetchGenreList, fetchDiscoverList  } = this.props
+
+        fetchGenreList()
+        fetchDiscoverList()
     }
 
     limitMovieOverview(overview, len = 280, end = '...') {
@@ -25,11 +27,7 @@ class Item extends Component {
 	}
 
     render() {
-
-        const { 
-            discoverList: { movies, results, isFetching, error },
-            genreList: { genres }
-        } = this.props
+        const { movies, results, genres } = this.props
 
         return (
             movies.map((movie) => (
@@ -49,12 +47,14 @@ class Item extends Component {
 }
 
 const mapStateToProps = state => ({ 
-    discoverList: state.discoverListReducer,
-    genreList: state.genreListReducer
+    movies: state.discoverListReducer.movies,
+    results: state.discoverListReducer.results,
+    genres: state.genreListReducer.genres
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
-    fetchDiscoverList, fetchGenreList 
+    fetchDiscoverList, 
+    fetchGenreList 
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item)

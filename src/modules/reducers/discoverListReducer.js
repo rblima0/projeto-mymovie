@@ -1,4 +1,4 @@
-const INITIAL_STATE = { isFetching: false, movies: [], results: [], error: {} }
+const INITIAL_STATE = { movies: [], results: [], isFetching: false, error: {} }
 
 const discoverListReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {

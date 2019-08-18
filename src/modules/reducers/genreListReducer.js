@@ -1,4 +1,4 @@
-const INITIAL_STATE = { isFetching: false, genres: [], error: {} }
+const INITIAL_STATE = { genres: [], isFetching: false, error: {} }
 
 const genreListReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {

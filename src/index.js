@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { store } from  './store/store'
 
-import Movie from './components/Movie'
+import Movie from './modules/components/Movie'
 import App from './App'
 
 import './assets/css/index.css'

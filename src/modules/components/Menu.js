@@ -11,11 +11,13 @@ class Menu extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchGenreList()
+        const { fetchGenreList } = this.props
+        
+        fetchGenreList()
     }
 
     render() {
-        const { genreList: { genres, isFetching, error } } = this.props
+        const { genres } = this.props
         
         return (
             <section className="col col-sidebar">
@@ -48,7 +50,12 @@ class Menu extends Component {
     }
 }
 
-const mapStateToProps = state => ({ genreList: state.genreListReducer })
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchGenreList }, dispatch)
+const mapStateToProps = state => ({ 
+    genres: state.genreListReducer.genres
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    fetchGenreList 
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)
