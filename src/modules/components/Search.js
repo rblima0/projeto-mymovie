@@ -18,7 +18,6 @@ class Search extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        this.props.history.push("/search" + this.state.search)
 		this.props.fetchSearchMovieList(this.state.search)
 	}
 
