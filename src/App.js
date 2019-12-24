@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 
-function App() {
-  return <h1>Projeto My Movie</h1>
+import Routes from './Routes'
+
+const browserHistory = createBrowserHistory()
+
+export default class App extends PureComponent {
+  render() {
+    return (
+      <Router history={browserHistory}>
+        <Routes />
+      </Router>
+    )
+  }
 }
-
-export default App
