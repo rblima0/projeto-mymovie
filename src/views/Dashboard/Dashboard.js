@@ -1,11 +1,15 @@
 import React from 'react'
+import { Card } from '../../components/Card/Card'
 
 import './Dashboard.styl'
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <h4>Informações sobre o filme</h4>
+      <Card />
+      <Card />
+      <Card />
+      <Card />
     </div>
   )
 }
