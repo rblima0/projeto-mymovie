@@ -2,8 +2,8 @@ import React from 'react'
 import { Switch, Redirect } from 'react-router-dom'
 
 import { RouteWithLayout } from './components/RouteWithLayout/RouteWithLayout'
-import { Main as MainLayout } from './layouts/Main'
-import { Dashboard as DashboardView } from './views/Dashboard'
+import { Main as MainLayout } from './views/Main/Main'
+import { Dashboard as DashboardView } from './views/Dashboard/Dashboard'
 
 const Routes = () => {
   return (
