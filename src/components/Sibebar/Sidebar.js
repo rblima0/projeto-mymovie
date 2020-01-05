@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Drawer } from '@material-ui/core'
-import { SidebarNav } from '../SidebarNav/SidebarNav'
+import { SidebarNav } from './SidebarNav/SidebarNav'
 
 import './Sidebar.styl'
 
 const Sidebar = props => {
-  const { open, variant, onClose, className, primaryMenu, secondaryMenu, ...rest } = props
+  const { open, variant, onClose, className, genres, ...rest } = props
 
   return (
     <Drawer
@@ -17,15 +17,8 @@ const Sidebar = props => {
       classes={{ paper: 'sidebar__drawer' }}
       anchor="left"
     >
-      <div
-        {...rest}
-        className='sidebar'
-      >
-        <SidebarNav
-          className='sidebar__nav'
-          primaryMenu={primaryMenu}
-          secondaryMenu={secondaryMenu}
-        />
+      <div {...rest} className="sidebar">
+        <SidebarNav className="sidebar__nav" genres={genres} />
       </div>
     </Drawer>
   )
@@ -37,7 +30,7 @@ Sidebar.propTypes = {
   open: PropTypes.bool.isRequired,
   variant: PropTypes.string.isRequired,
   primaryMenu: PropTypes.array,
-  secondaryMenu: PropTypes.array
+  genres: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 }
 
 export { Sidebar }

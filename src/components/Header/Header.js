@@ -15,14 +15,11 @@ const Header = props => {
   const [notifications] = useState([])
 
   return (
-    <AppBar
-      {...rest}
-      className="header"
-    >
+    <AppBar {...rest} className="header">
       <Toolbar className={className}>
         <div className="header__info">
-          <h2>Jumanji</h2>
-          <p>Conheça melhor o filme</p>
+          <h2>Listagem de Filmes</h2>
+          <p>Conheça melhor os filmes</p>
         </div>
         <div className="header__flexgrow" />
         <Hidden>
@@ -33,10 +30,7 @@ const Header = props => {
           >
             <MenuIcon />
           </IconButton>
-          <IconButton
-            className="header__icon__button"
-            color="inherit"
-          >
+          <IconButton className="header__icon__button" color="inherit">
             <Badge
               badgeContent={notifications.length}
               color="primary"
@@ -45,10 +39,7 @@ const Header = props => {
               <AccountIcon />
             </Badge>
           </IconButton>
-          <IconButton
-            className="header__icon__button"
-            color="inherit"
-          >
+          <IconButton className="header__icon__button" color="inherit">
             <NotificationsIcon />
           </IconButton>
         </Hidden>
@@ -59,7 +50,7 @@ const Header = props => {
 
 Header.propTypes = {
   className: PropTypes.string,
-  onSidebarOpen: PropTypes.func
+  onSidebarOpen: PropTypes.func,
 }
 
 export { Header }
