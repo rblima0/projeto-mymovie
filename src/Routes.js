@@ -1,22 +1,25 @@
 import React from 'react'
 import { Switch, Redirect } from 'react-router-dom'
 
-import { RouteWithLayout } from './components/RouteWithLayout/RouteWithLayout'
-import { Main as MainLayout } from './views/Main/Main'
-import { Dashboard as DashboardView } from './views/Dashboard/Dashboard'
+import { SimpleRoute } from './components/SimpleRoute/SimpleRoute'
+
+import { Main as MainLayout } from './page/Main/Main'
+import { Dashboard as DashboardView } from './page/Dashboard/Dashboard'
 
 const Routes = () => {
   return (
     <Switch>
-      <Redirect
-        exact
-        from="/"
-        to="/dashboard"
-      />
-      <RouteWithLayout
+      <Redirect from="/" to="/dashboard" exact />
+      <SimpleRoute
         component={DashboardView}
         layout={MainLayout}
         path="/dashboard"
+        exact
+      />
+      <SimpleRoute
+        component={DashboardView}
+        layout={MainLayout}
+        path="/genre/:movie_genre"
         exact
       />
       <Redirect to="/not-found" />
