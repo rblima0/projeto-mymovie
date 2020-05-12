@@ -25,6 +25,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #1b1e23;
+    color: #fff;
   }
 
   body,
