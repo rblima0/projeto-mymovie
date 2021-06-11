@@ -1,6 +1,4 @@
-# Projeto MyMovies
+# Projeto MyMovies (ARQUIVADO)
 
-Projeto em desenvolvimento em breve mais informações...
-
-[Create React App](https://github.com/facebookincubator/create-react-app)
-[API](https://www.themoviedb.org/documentation/api)
+Este projeto foi migrado e implementado em um novo repositório
+[Link](https://github.com/rblima0/mymovies)
